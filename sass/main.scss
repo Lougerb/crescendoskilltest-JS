@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+}
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+body {
+  font-family: "Roboto";
+}
+
+#recipe {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: burlywood;
+  border-radius: 10px;
+  margin: 5px;
+}
+.food {
+  margin: 5px;
+  width: 300px;
+  background-color: #eee;
+  box-shadow: 2px 2px 5px black;
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.recipe {
+  &-subtitle {
+    font-size: 1.3em;
+    font-weight: bold;
+    &-wrapper {
+      margin: 4px 0;
+      li {
+        // display: flex;
+        // flex-direction: column;
+        .optional-wrapper {
+          h4 {
+            margin-right: 3px;
+          }
+          display: flex;
+        }
+        ul {
+          li {
+            div {
+              display: flex;
+              h4 {
+                margin-right: 2px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// .ingredient {
+//   li {
+//     ul {
+//       li {
+//         div {
+//           display: flex;
+//           h4 {
+//             margin-right: 2px;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+.date {
+  margin-top: 10px;
+
+  &-title {
+    font-weight: bold;
+  }
+}
