@@ -10,14 +10,16 @@
   <body>
     <div id="wrapper">
       <section id="recipe"></section>
+
       <template id="recipe-template">
         <div class="food">
+          <img src="" alt="" class="food-img" />
           <div class="recipe-subtitle-wrapper">
-            <span class="recipe-subtitle">UUID:</span>
+            <!-- <span class="recipe-subtitle">UUID:</span> -->
             <span class="food-id">1233</span>
           </div>
 
-          <h1 class="food-title">kamoteng kahoy</h1>
+          <h1 class="food-title">Food Title</h1>
           <div class="recipe-subtitle-wrapper">
             <span class="recipe-subtitle">Description:</span>
             <span class="recipe-subtitle-text description">
@@ -26,14 +28,7 @@
               veniam fugiat iure.
             </span>
           </div>
-          <div class="recipe-subtitle-wrapper">
-            <span class="recipe-subtitle">Images:</span>
-            <div class="img-wrapper">
-              <img src="" alt="img-1" class="recipie-img-full" />
-              <img src="" alt="img-2" class="recipie-img-med" />
-              <img src="" alt="img-3" class="recipie-img-sm" />
-            </div>
-          </div>
+
           <div class="recipe-subtitle-wrapper">
             <span class="recipe-subtitle">Servings:</span>
             <span class="recipe-subtitle-text servings">5</span>
@@ -46,34 +41,38 @@
             </span>
           </div>
           <div class="recipe-subtitle-wrapper">
+            <span class="recipe-subtitle">Prep Time:</span>
+            <span class="recipe-subtitle-text">
+              <span class="preptime">5</span>
+              <span>minutes</span>
+            </span>
+          </div>
+          <div class="recipe-subtitle-wrapper">
             <span class="recipe-subtitle">Ingredients:</span>
-            <ul class="ingredient">
+            <ul class="ingredient"></ul>
+            <template class="ingredient-template">
               <li>
                 <h4 class="ingredient-title">Kammote</h4>
                 <span>
-                  <span>UUID</span>
+                  <!-- <span class="ingredient-subtitle">UUID</span> -->
                   <span class="ingredient-id">1234</span>
                 </span>
                 <ul>
                   <li>
                     <div>
-                      <h4 class="ingredient-subtitle">Amount:</h4>
+                      <span class="ingredient-subtitle">Amount:</span>
                       <span class="amount">3</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <h4 class="ingredient-subtitle">Measurement:</h4>
-                      <span class="measurement">tablespoon</span>
+                      <span class="measurement">pieces</span>
                     </div>
                   </li>
                 </ul>
               </li>
-            </ul>
+            </template>
           </div>
           <div class="recipe-subtitle-wrapper">
             <span class="recipe-subtitle">Directions:</span>
-            <ol>
+            <ol class="direction-list"></ol>
+            <template class="direction-template">
               <li>
                 <span class="instruction">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -84,7 +83,7 @@
                   <span class="optional">No</span>
                 </span>
               </li>
-            </ol>
+            </template>
           </div>
           <div class="date">
             <div class="date-wrapper">
@@ -92,13 +91,16 @@
               <span class="date-time post">3/3/3 3:3:3</span>
             </div>
             <div class="date-wrapper">
-              <span class="date-title">Date post:</span>
+              <span class="date-title">Edit post:</span>
               <span class="date-time edit">3/3/3 3:3:3</span>
             </div>
           </div>
         </div>
       </template>
-      <div id="specials"></div>
+      <section id="specials"></section>
+      <template id="specials-template">
+        <div class="special-food"></div>
+      </template>
     </div>
     <script src="/js/script.js"></script>
   </body>
