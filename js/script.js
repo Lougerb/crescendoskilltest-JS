@@ -6,24 +6,23 @@ const recipeWrapper = document.querySelector("#recipe-template"),
   specialWrapper = document.querySelector("#specials-template"),
   specialSection = document.querySelector("#specials");
 
+// To get ID and Name of Ingredients for Special's matching IngredientID
+const storeIngID = [{}];
+
+const getIngredientID = function (ingID, ingName) {
+  const ingObj = {};
+  ingObj.ingredientID = ingID;
+  ingObj.ingredientName = ingName;
+  storeIngID.push(ingObj);
+};
+
 async function getRecipe() {
-  const fetchRecipe = await fetch(
-    "https://bitbucket.org/crescendocollective/frontend-api-skills-test/raw/c69c3c10cbebb6ec1d9100182a836d9459159671/data.json"
-  );
+  // const fetchRecipe = await fetch("./data.json");
+  const fetchRecipe = await fetch("http://localhost:3000/recipes ");
   const recipe = await fetchRecipe.json();
-  console.log(recipe);
+  // console.log(recipe);
 
-  const { recipes: recipeList, specials: specialsList } = recipe;
-
-  const storeIngID = [{}];
-  const getIngredientID = function (ingID, ingName) {
-    const ingObj = {};
-    ingObj.ingredientID = ingID;
-    ingObj.ingredientName = ingName;
-    storeIngID.push(ingObj);
-  };
-
-  recipeList.forEach((recipeFood) => {
+  recipe.forEach((recipeFood) => {
     // Datastruct
     const {
       uuid: foodID,
@@ -43,17 +42,15 @@ async function getRecipe() {
     // Copy the node
     const newRecipe = document.importNode(recipeWrapper.content, true);
     // Defining elements to be inserted by datas
-    const foodUUID = newRecipe.querySelector(".food-id");
-
-    const foodTitle = newRecipe.querySelector(".food-title");
-    const foodDesc = newRecipe.querySelector(".description");
-    const foodServ = newRecipe.querySelector(".servings");
-    const foodPrepTime = newRecipe.querySelector(".preptime");
-    const foodCookTime = newRecipe.querySelector(".cooktime");
-    const foodimg = newRecipe.querySelector(".food-img");
-
-    const foodPostTime = newRecipe.querySelector(".post");
-    const foodEditTime = newRecipe.querySelector(".edit");
+    const foodUUID = newRecipe.querySelector(".food-id"),
+      foodTitle = newRecipe.querySelector(".food-title"),
+      foodDesc = newRecipe.querySelector(".description"),
+      foodServ = newRecipe.querySelector(".servings"),
+      foodPrepTime = newRecipe.querySelector(".preptime"),
+      foodCookTime = newRecipe.querySelector(".cooktime"),
+      foodimg = newRecipe.querySelector(".food-img"),
+      foodPostTime = newRecipe.querySelector(".post"),
+      foodEditTime = newRecipe.querySelector(".edit");
     // console.log(foodID);
     foodimg.setAttribute("src", imgMed);
     foodUUID.textContent = foodID;
@@ -107,11 +104,17 @@ async function getRecipe() {
     foodEditTime.textContent = editDate;
     recipieSection.appendChild(newRecipe);
   });
+}
+
+async function getSpecials() {
+  const fetchRecipe = await fetch("http://localhost:3000/specials ");
+  const specials = await fetchRecipe.json();
+  // console.log(specials);
 
   storeIngID.forEach((ingArr) => {
     const { ingredientID: recIngID, ingredientName } = ingArr;
 
-    specialsList.forEach((specialFoods) => {
+    specials.forEach((specialFoods) => {
       const { uuid, ingredientId, type, title, geo, text } = specialFoods;
       const newSpecial = document.importNode(specialWrapper.content, true);
       const ingName = newSpecial.querySelector(".special-ingredient-name");
@@ -125,11 +128,15 @@ async function getRecipe() {
         specialTitle.textContent = title;
         specialType.textContent = type;
         specialP.textContent = text;
-        specialGeo.textContent = geo;
+        specialGeo.textContent = specialFoods.hasOwnProperty("geo")
+          ? geo
+          : "Coordinate Not Available";
         specialSection.appendChild(newSpecial);
         // console.log(ingredientId);
       }
     });
   });
 }
+
 getRecipe();
+getSpecials();
