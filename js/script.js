@@ -22,7 +22,6 @@ async function getRecipe() {
     ingObj.ingredientName = ingName;
     storeIngID.push(ingObj);
   };
-  // Test
 
   recipeList.forEach((recipeFood) => {
     // Datastruct
