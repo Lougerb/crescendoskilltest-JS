@@ -7,7 +7,9 @@ const recipeWrapper = document.querySelector("#recipe-template"),
   specialSection = document.querySelector("#specials");
 
 async function getRecipe() {
-  const fetchRecipe = await fetch("./data.json");
+  const fetchRecipe = await fetch(
+    "https://bitbucket.org/crescendocollective/frontend-api-skills-test/raw/c69c3c10cbebb6ec1d9100182a836d9459159671/data.json"
+  );
   const recipe = await fetchRecipe.json();
   console.log(recipe);
 
@@ -105,45 +107,6 @@ async function getRecipe() {
     foodEditTime.textContent = editDate;
     recipieSection.appendChild(newRecipe);
   });
-  console.log(storeIngID);
-  // console.log(recipeList);
-  // specialsList.forEach((specialFoods) => {
-  //   const {
-  //     uuid,
-  //     ingredientID: specialIngID,
-  //     type,
-  //     title,
-  //     geo,
-  //     text,
-  //   } = specialFoods;
-  //   const newSpecial = document.importNode(specialWrapper.content, true);
-
-  //   const ingName = newSpecial.querySelector(".special-ingredient-name");
-  //   const specialTitle = newSpecial.querySelector(".special-title");
-  //   const specialType = newSpecial.querySelector(".special-type");
-  //   const specialP = newSpecial.querySelector(".special-p");
-  //   const specialGeo = newSpecial.querySelector(".special-geo");
-
-  //   // specialTitle.textContent = title;
-  //   // specialType.textContent = type;
-  //   // specialP.textContent = text;
-  //   // specialGeo.textContent = geo;
-  //   // specialSection.appendChild(newSpecial);
-
-  //   storeIngID.forEach((ingArr) => {
-  //     const { ingredientID: recIngID, ingredientName } = ingArr;
-
-  //     if (recIngID == specialIngID) {
-  //       ingName.textContent = ingredientName;
-  //     }
-  //     console.log(ingredientName);
-  //   });
-  //   specialTitle.textContent = title;
-  //   specialType.textContent = type;
-  //   specialP.textContent = text;
-  //   specialGeo.textContent = geo;
-  //   specialSection.appendChild(newSpecial);
-  // });
 
   storeIngID.forEach((ingArr) => {
     const { ingredientID: recIngID, ingredientName } = ingArr;
