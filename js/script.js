@@ -132,6 +132,7 @@ async function getSpecials() {
           ? geo
           : "Coordinate Not Available";
         specialSection.appendChild(newSpecial);
+        // add
       }
     });
   });
