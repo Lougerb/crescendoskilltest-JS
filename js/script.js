@@ -2,16 +2,26 @@
 
 const recipeWrapper = document.querySelector("#recipe-template"),
   recipieSection = document.querySelector("#recipe"),
-  foodWrapper = document.querySelector(".food");
+  foodWrapper = document.querySelector(".food"),
+  specialWrapper = document.querySelector("#specials-template"),
+  specialSection = document.querySelector("#specials");
 
 async function getRecipe() {
   const fetchRecipe = await fetch("./data.json");
   const recipe = await fetchRecipe.json();
-  // console.log(recipe.recipes);
+  console.log(recipe);
 
-  const recipeList = recipe.recipes;
+  const { recipes: recipeList, specials: specialsList } = recipe;
 
-  recipeList.forEach((food) => {
+  const storeIngID = [{}];
+  const getIngredientID = function (ingID, ingName) {
+    const ingObj = {};
+    ingObj.ingredientID = ingID;
+    ingObj.ingredientName = ingName;
+    storeIngID.push(ingObj);
+  };
+
+  recipeList.forEach((recipeFood) => {
     // Datastruct
     const {
       uuid: foodID,
@@ -25,7 +35,7 @@ async function getRecipe() {
       directions,
       postDate,
       editDate,
-    } = food;
+    } = recipeFood;
 
     // generate and insert data to elements
     // Copy the node
@@ -51,11 +61,13 @@ async function getRecipe() {
     foodPrepTime.textContent = prepTime;
     foodCookTime.textContent = cookTime;
 
-    Object.entries(ingredients).forEach((ingredientArr, ingredientKey) => {
-      const [
-        ingredientNum,
-        { uuid: ingredientsID, amount, measurement, name: ingredientName },
-      ] = ingredientArr;
+    ingredients.forEach((ingredientArr) => {
+      const {
+        uuid: ingredientsID,
+        amount,
+        measurement,
+        name: ingredientName,
+      } = ingredientArr;
       const ingredientListTemplate = newRecipe.querySelector(
         ".ingredient-template"
       );
@@ -73,15 +85,11 @@ async function getRecipe() {
       ingredientAmount.textContent = amount;
       ingredientMeasure.textContent = measurement;
       ingredientList.appendChild(newIngredient);
-
-      // const sampleID = "3d810ba9-7e4e-48aa-b2e9-7918e38b358d";
-
-      // if (sampleID == ingredientsID) {
-      //   console.log(ingredientName);
-      // }
+      // console.log(ingredientsID);
+      getIngredientID(ingredientsID, ingredientName);
     });
-    Object.entries(directions).forEach((directArr, directKey) => {
-      const [num, { instructions, optional }] = directArr;
+    directions.forEach((directArr) => {
+      const { instructions, optional } = directArr;
       const directTemplate = newRecipe.querySelector(".direction-template");
       const directList = newRecipe.querySelector(".direction-list");
       const newDirect = document.importNode(directTemplate.content, true);
@@ -96,6 +104,69 @@ async function getRecipe() {
     foodPostTime.textContent = postDate;
     foodEditTime.textContent = editDate;
     recipieSection.appendChild(newRecipe);
+  });
+  console.log(storeIngID);
+  // console.log(recipeList);
+  // specialsList.forEach((specialFoods) => {
+  //   const {
+  //     uuid,
+  //     ingredientID: specialIngID,
+  //     type,
+  //     title,
+  //     geo,
+  //     text,
+  //   } = specialFoods;
+  //   const newSpecial = document.importNode(specialWrapper.content, true);
+
+  //   const ingName = newSpecial.querySelector(".special-ingredient-name");
+  //   const specialTitle = newSpecial.querySelector(".special-title");
+  //   const specialType = newSpecial.querySelector(".special-type");
+  //   const specialP = newSpecial.querySelector(".special-p");
+  //   const specialGeo = newSpecial.querySelector(".special-geo");
+
+  //   // specialTitle.textContent = title;
+  //   // specialType.textContent = type;
+  //   // specialP.textContent = text;
+  //   // specialGeo.textContent = geo;
+  //   // specialSection.appendChild(newSpecial);
+
+  //   storeIngID.forEach((ingArr) => {
+  //     const { ingredientID: recIngID, ingredientName } = ingArr;
+
+  //     if (recIngID == specialIngID) {
+  //       ingName.textContent = ingredientName;
+  //     }
+  //     console.log(ingredientName);
+  //   });
+  //   specialTitle.textContent = title;
+  //   specialType.textContent = type;
+  //   specialP.textContent = text;
+  //   specialGeo.textContent = geo;
+  //   specialSection.appendChild(newSpecial);
+  // });
+
+  storeIngID.forEach((ingArr) => {
+    const { ingredientID: recIngID, ingredientName } = ingArr;
+
+    specialsList.forEach((specialFoods) => {
+      const { uuid, ingredientId, type, title, geo, text } = specialFoods;
+      const newSpecial = document.importNode(specialWrapper.content, true);
+      const ingName = newSpecial.querySelector(".special-ingredient-name");
+      const specialTitle = newSpecial.querySelector(".special-title");
+      const specialType = newSpecial.querySelector(".special-type");
+      const specialP = newSpecial.querySelector(".special-p");
+      const specialGeo = newSpecial.querySelector(".special-geo");
+
+      if (ingredientId == recIngID) {
+        ingName.textContent = ingredientName;
+        specialTitle.textContent = title;
+        specialType.textContent = type;
+        specialP.textContent = text;
+        specialGeo.textContent = geo;
+        specialSection.appendChild(newSpecial);
+        // console.log(ingredientId);
+      }
+    });
   });
 }
 getRecipe();

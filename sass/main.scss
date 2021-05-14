@@ -5,14 +5,44 @@
 body {
   font-family: "Roboto";
 }
-
+#specials {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: rgb(238, 224, 203);
+  border-radius: 10px;
+  margin: 5px;
+}
+.special {
+  &-food {
+    margin: 5px;
+    width: 200px;
+    height: fit-content;
+    background-color: rgb(255, 255, 176);
+    box-shadow: 2px 2px 5px black;
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  &-ingredient-name {
+    font-size: 1.9em;
+  }
+  &-title {
+    font-size: 1.4em;
+    font-weight: bold;
+  }
+  &-type {
+    padding: 5px;
+    background-color: rgb(52, 52, 255);
+    border-radius: 6px;
+    color: yellow;
+    font-size: 1.2em;
+  }
+}
 #recipe {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  // display: grid;
-  // grid-template-columns: auto auto;
-  // grid-template-rows: auto;
   background-color: burlywood;
   border-radius: 10px;
   margin: 5px;

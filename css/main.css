@@ -7,6 +7,49 @@ body {
   font-family: "Roboto";
 }
 
+#specials {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  background-color: #eee0cb;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.special-food {
+  margin: 5px;
+  width: 200px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: #ffffb0;
+  -webkit-box-shadow: 2px 2px 5px black;
+          box-shadow: 2px 2px 5px black;
+  border-radius: 10px;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.special-ingredient-name {
+  font-size: 1.9em;
+}
+.special-title {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+.special-type {
+  padding: 5px;
+  background-color: #3434ff;
+  border-radius: 6px;
+  color: yellow;
+  font-size: 1.2em;
+}
+
 #recipe {
   display: -webkit-box;
   display: -ms-flexbox;
