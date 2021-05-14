@@ -134,3 +134,7 @@ body {
 #wrapper .h1-title {
   font-size: 5em;
 }
+
+.hideme {
+  visibility: hidden;
+}
